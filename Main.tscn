@@ -1,3 +1,90 @@
-[gd_scene format=2]
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 28, 28 )
 
 [node name="Main" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 496.586, 180.172 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="DemoWall" type="StaticBody2D" parent="."]
+position = Vector2( 499.13, 238.174 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="DemoWall"]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 4, 4, 56, 56 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DemoWall"]
+shape = SubResource( 1 )
+
+[node name="DemoWall3" type="StaticBody2D" parent="."]
+position = Vector2( 589.488, 188.786 )
+scale = Vector2( 1, 0.2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="DemoWall3"]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 4, 4, 56, 56 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DemoWall3"]
+shape = SubResource( 1 )
+
+[node name="DemoWall4" type="StaticBody2D" parent="."]
+position = Vector2( 711.836, 188.224 )
+scale = Vector2( 1, 0.2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="DemoWall4"]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 4, 4, 56, 56 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DemoWall4"]
+shape = SubResource( 1 )
+
+[node name="DemoWall5" type="StaticBody2D" parent="."]
+position = Vector2( 652.346, 150.061 )
+scale = Vector2( 1, 0.2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="DemoWall5"]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 4, 4, 56, 56 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DemoWall5"]
+shape = SubResource( 1 )
+
+[node name="DemoWall2" type="StaticBody2D" parent="."]
+position = Vector2( 659.642, 247.715 )
+scale = Vector2( 4, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="DemoWall2"]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 4, 4, 56, 56 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DemoWall2"]
+shape = SubResource( 1 )

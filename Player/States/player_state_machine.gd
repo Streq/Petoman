@@ -5,6 +5,9 @@ func _ready():
 		"idle": $idle,
 		"run": $run,
 		"air": $air,
+		"stop": $stop,
+		"bonk": $bonk,
+		"land": $land,
 	}
 
 func _change_state(state_name):

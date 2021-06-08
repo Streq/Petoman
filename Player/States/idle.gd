@@ -12,17 +12,17 @@ func update(delta):
 	
 	var p = owner as Player
 
-	p.velocity.x = approach(p.velocity.x, 0, 25000*delta)
+	p.velocity.x = approach(p.velocity.x, 0, 100000*delta)
 	if p.is_on_floor():
 		
 		if jump:
-			p.velocity.y -= p.jump_speed
+			emit_signal("finished", "jump", input_direction.y)
 		if input_direction.x:
-			emit_signal("finished", "run")
+			emit_signal("finished", "run", null)
 		elif abs(p.velocity.x) > 10000:
-			emit_signal("finished", "stop")
+			emit_signal("finished", "stop", null)
 	else:
-		emit_signal("finished", "air")
+		emit_signal("finished", "air", null)
 	
 	jump = false
 	

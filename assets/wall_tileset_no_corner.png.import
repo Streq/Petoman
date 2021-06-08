@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Untitled.png-f999cbd9ad67ebf939413b3a76841057.stex"
+path="res://.import/wall_tileset_no_corner.png-33392b2afcc45a2413eb0c212e6f17e4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Untitled.png"
-dest_files=[ "res://.import/Untitled.png-f999cbd9ad67ebf939413b3a76841057.stex" ]
+source_file="res://assets/wall_tileset_no_corner.png"
+dest_files=[ "res://.import/wall_tileset_no_corner.png-33392b2afcc45a2413eb0c212e6f17e4.stex" ]
 
 [params]
 

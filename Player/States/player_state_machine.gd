@@ -8,9 +8,12 @@ func _ready():
 		"stop": $stop,
 		"bonk": $bonk,
 		"land": $land,
+		"jump": $jump,
 	}
 
-func _change_state(state_name):
+func _change_state(state_name, param):
 	if not _active:
 		return
-	._change_state(state_name)
+	if state_name == "jump":
+		states_map.jump.initialize(param)
+	._change_state(state_name, param)

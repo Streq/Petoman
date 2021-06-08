@@ -1,6 +1,5 @@
 extends "move.gd"
 
-var jump := false
 
 var finished := false
 
@@ -15,12 +14,6 @@ func update(delta):
 	
 	if p.is_on_floor():
 		p.velocity.x = approach(p.velocity.x, 0, 30000*delta)
-		
-	
-
-func handle_input(event):
-	if(event.is_action_pressed("jump")):
-		jump = true
 
 func _on_animation_finished(name):
-	emit_signal("finished","idle")
+	emit_signal("finished","idle", null)

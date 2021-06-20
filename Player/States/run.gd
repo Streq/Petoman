@@ -1,6 +1,5 @@
 extends "move.gd"
 
-var jump := false
 
 func enter():
 	var input_direction = get_input_direction()
@@ -16,9 +15,9 @@ func update(delta):
 	p.velocity.x = lerp(p.velocity.x, p.run_max_speed*input_direction.x, 0.05)
 	
 	if p.is_on_floor():
-		if jump:
-			emit_signal("finished", "jump", input_direction.y)
-		if not input_direction.x:
+		if p.jump:
+			emit_signal("finished", "lean_jump", input_direction.y)
+		elif not input_direction.x:
 			if abs(p.velocity.x) < 5000:
 				emit_signal("finished", "idle", null)
 			else:
@@ -28,8 +27,5 @@ func update(delta):
 	else:
 		emit_signal("finished", "air", null)
 	
-	jump = false
+	p.jump = false
 
-func handle_input(event):
-	if(event.is_action_pressed("jump")):
-		jump = true

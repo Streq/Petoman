@@ -1,7 +1,5 @@
 extends "move.gd"
 
-var jump := false
-
 func enter():
 	owner.get_node("AnimationPlayer").play("stop")
 
@@ -15,9 +13,9 @@ func update(delta):
 
 	if p.is_on_floor():
 #		p.velocity.x = lerp(p.velocity.x, 0, 0.1)
-		p.velocity.x = approach(p.velocity.x, 0, 50000*delta)
+		p.velocity.x = approach(p.velocity.x, 0, 25000*delta)
 		
-		if jump:
+		if p.jump:
 			emit_signal("finished", "jump", input_direction.y)
 		if input_direction.x == p.look_direction.x:
 			emit_signal("finished", "run", null)
@@ -27,9 +25,5 @@ func update(delta):
 	else:
 		emit_signal("finished", "air", null)
 		
-	jump = false
-	
+	p.jump = false
 
-func handle_input(event):
-	if(event.is_action_pressed("jump")):
-		jump = true

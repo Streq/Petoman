@@ -3,8 +3,15 @@ extends "move.gd"
 var current_fall_speed = 0
 
 func enter():
-	owner.get_node("AnimationPlayer").play("air")
+	setAnim()
+	setFeetCollider(false)
 
+func exit():
+	setFeetCollider(true)
+	
+func setAnim():
+	owner.get_node("AnimationPlayer").play("air")
+	
 func update(delta):
 	var p = owner as Player
 	
@@ -14,7 +21,13 @@ func update(delta):
 	var input_direction = get_input_direction()
 	
 	p.velocity.x = lerp(p.velocity.x, p.run_max_speed*input_direction.x, 0.001)
-	if p.is_on_floor():
+	
+	if p.jump:
+		p.jump = false
+		emit_signal("finished", "lean_jump", 1)
+		
+		
+	elif p.is_on_floor():
 		if current_fall_speed > 15000:
 			emit_signal("finished", "land", null)
 		elif abs(p.velocity.x) < 5000:
@@ -25,3 +38,8 @@ func update(delta):
 			emit_signal("finished", "stop", null)
 	elif p.is_on_ceiling():
 		emit_signal("finished", "bonk", null)
+
+func setFeetCollider(value):
+	owner.get_node("collisionShape").disabled = !value
+	owner.get_node("collisionShapeNoFeet").disabled = value
+	

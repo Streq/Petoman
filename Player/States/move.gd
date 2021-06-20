@@ -20,7 +20,7 @@ func update(delta):
 	var p = owner as Player
 	p.velocity.y += p.gravity*delta
 	p.move_and_slide(p.velocity*delta, Vector2.UP)
-	if p.is_on_floor() or p.is_on_ceiling():
+	if p.is_on_floor() and p.velocity.y > 0 or p.is_on_ceiling() and p.velocity.y < 0:
 		p.velocity.y = 0
 	if p.is_on_wall():
 		p.velocity.x = 0

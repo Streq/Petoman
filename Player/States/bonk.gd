@@ -1,6 +1,6 @@
 extends "air.gd"
 
-func enter():
+func setAnim():
 	owner.get_node("AnimationPlayer").play("bonk")
 
 func update(delta):

@@ -46,8 +46,7 @@ func end():
 func update(delta):
 	.update(delta)
 	var p = owner as Player	
-	if p.is_on_floor():
-		if timer.time_left <= 0:
-			end()
-	else:
+	if timer.time_left <= 0:
+		end()
+	elif !p.is_on_floor():
 		emit_signal("finished", "air", null)

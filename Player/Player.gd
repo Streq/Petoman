@@ -18,8 +18,5 @@ func _ready():
 	pass
 
 
-
-
-func _input(event):
-	if(event.is_action_pressed("jump")):
-		jump = true
+func _physics_process(delta):
+	jump = Input.is_action_pressed("jump")

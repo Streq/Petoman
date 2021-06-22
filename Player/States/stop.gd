@@ -14,9 +14,10 @@ func update(delta):
 	if p.is_on_floor():
 #		p.velocity.x = lerp(p.velocity.x, 0, 0.1)
 		p.velocity.x = approach(p.velocity.x, 0, 25000*delta)
-		
+#		p.velocity.x = approach(p.velocity.x, 0, 25000*delta)
 		if p.jump:
 			emit_signal("finished", "jump", input_direction.y)
+			pass
 		if input_direction.x == p.look_direction.x:
 			emit_signal("finished", "run", null)
 		elif abs(p.velocity.x) < 2000:

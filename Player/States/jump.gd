@@ -50,3 +50,4 @@ func update(delta):
 		end()
 	elif !p.is_on_floor():
 		emit_signal("finished", "air", null)
+

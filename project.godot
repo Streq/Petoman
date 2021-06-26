@@ -22,12 +22,19 @@ _global_script_class_icons={
 
 config/name="Petoman"
 run/main_scene="res://Fake3D_Parallax.tscn"
+boot_splash/image="res://assets/marillo.png"
+boot_splash/bg_color=Color( 0.12549, 0.145098, 0.192157, 1 )
 config/icon="res://icon.png"
+
+[autoload]
+
+IntegerScaling="*res://AutoLoad/integer_scaling.gd"
 
 [display]
 
-window/size/width=640
-window/size/height=480
+window/size/width=320
+window/size/height=240
+window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
 [input]

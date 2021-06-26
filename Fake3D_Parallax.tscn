@@ -12,10 +12,10 @@ zoom = Vector2( 0.5, 0.5 )
 
 [node name="Camera2D2" type="Camera2D" parent="."]
 anchor_mode = 0
+current = true
 
 [node name="Camera2D3" type="Camera2D" parent="."]
 anchor_mode = 0
-current = true
 zoom = Vector2( 0.25, 0.25 )
 
 [node name="Autotile" parent="." instance=ExtResource( 1 )]

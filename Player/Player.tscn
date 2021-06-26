@@ -1,23 +1,23 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
-[ext_resource path="res://assets/petoman.png" type="Texture" id=1]
-[ext_resource path="res://Player/Player.gd" type="Script" id=2]
-[ext_resource path="res://Player/States/air.gd" type="Script" id=3]
-[ext_resource path="res://Player/States/run.gd" type="Script" id=4]
-[ext_resource path="res://Player/States/idle.gd" type="Script" id=5]
-[ext_resource path="res://Player/States/player_state_machine.gd" type="Script" id=6]
-[ext_resource path="res://Player/States/stop.gd" type="Script" id=7]
-[ext_resource path="res://Player/States/bonk.gd" type="Script" id=8]
-[ext_resource path="res://Player/States/land.gd" type="Script" id=9]
-[ext_resource path="res://Player/States/mouse_jump.gd" type="Script" id=10]
+[ext_resource path="res://assets/petoman premortem2.png" type="Texture" id=1]
+[ext_resource path="res://Player/States/land.gd" type="Script" id=2]
+[ext_resource path="res://Player/States/bonk.gd" type="Script" id=3]
+[ext_resource path="res://Player/States/idle.gd" type="Script" id=4]
+[ext_resource path="res://Player/Player.gd" type="Script" id=5]
+[ext_resource path="res://Player/States/air.gd" type="Script" id=6]
+[ext_resource path="res://Player/States/mouse_jump.gd" type="Script" id=7]
+[ext_resource path="res://Player/States/run.gd" type="Script" id=8]
+[ext_resource path="res://Player/States/stop.gd" type="Script" id=9]
+[ext_resource path="res://Player/States/player_state_machine.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 6.5 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4, 4.5 )
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("BodyPivot/Sprite:frame")
@@ -32,8 +32,7 @@ tracks/0/keys = {
 "values": [ 13 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "bonk"
+[sub_resource type="Animation" id=4]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("BodyPivot/Sprite:frame")
@@ -48,7 +47,23 @@ tracks/0/keys = {
 "values": [ 10 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
+resource_name = "fell"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 6, 5 ]
+}
+
+[sub_resource type="Animation" id=6]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("BodyPivot/Sprite:frame")
@@ -63,8 +78,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "jump"
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("BodyPivot/Sprite:frame")
 tracks/0/interp = 1
@@ -78,7 +92,7 @@ tracks/0/keys = {
 "values": [ 11 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=8]
 length = 0.25
 tracks/0/type = "value"
 tracks/0/path = NodePath("BodyPivot/Sprite:frame")
@@ -93,7 +107,7 @@ tracks/0/keys = {
 "values": [ 11 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=9]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("BodyPivot/Sprite:frame")
@@ -108,7 +122,7 @@ tracks/0/keys = {
 "values": [ 2, 3, 4, 1 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=10]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("BodyPivot/Sprite:frame")
@@ -124,7 +138,7 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
-script = ExtResource( 2 )
+script = ExtResource( 5 )
 
 [node name="BodyPivot" type="Position2D" parent="."]
 
@@ -132,6 +146,7 @@ script = ExtResource( 2 )
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 2
+frame = 6
 
 [node name="collisionShape" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.5 )
@@ -140,42 +155,48 @@ shape = SubResource( 1 )
 [node name="collisionShapeNoFeet" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 0, 2.5 )
-shape = SubResource( 9 )
+shape = SubResource( 2 )
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
-anims/air = SubResource( 2 )
-anims/bonk = SubResource( 3 )
-anims/idle = SubResource( 4 )
-anims/jump = SubResource( 5 )
-anims/land = SubResource( 6 )
-anims/run = SubResource( 7 )
-anims/stop = SubResource( 8 )
+anims/air = SubResource( 3 )
+anims/bonk = SubResource( 4 )
+anims/fell = SubResource( 5 )
+anims/idle = SubResource( 6 )
+anims/jump = SubResource( 7 )
+anims/land = SubResource( 8 )
+anims/run = SubResource( 9 )
+anims/stop = SubResource( 10 )
 
 [node name="States" type="Node" parent="."]
-script = ExtResource( 6 )
+script = ExtResource( 10 )
 START_STATE = NodePath("idle")
 
 [node name="idle" type="Node" parent="States"]
-script = ExtResource( 5 )
-
-[node name="run" type="Node" parent="States"]
 script = ExtResource( 4 )
 
-[node name="air" type="Node" parent="States"]
-script = ExtResource( 3 )
-
-[node name="bonk" type="Node" parent="States"]
+[node name="run" type="Node" parent="States"]
 script = ExtResource( 8 )
 
-[node name="stop" type="Node" parent="States"]
-script = ExtResource( 7 )
+[node name="air" type="Node" parent="States"]
+script = ExtResource( 6 )
 
-[node name="land" type="Node" parent="States"]
+[node name="bonk" type="Node" parent="States"]
+script = ExtResource( 3 )
+
+[node name="stop" type="Node" parent="States"]
 script = ExtResource( 9 )
 
+[node name="land" type="Node" parent="States"]
+script = ExtResource( 2 )
+animation = "land"
+
+[node name="fell" type="Node" parent="States"]
+script = ExtResource( 2 )
+animation = "fell"
+
 [node name="jump" type="Node" parent="States"]
-script = ExtResource( 10 )
+script = ExtResource( 7 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="States" method="_on_animation_finished"]

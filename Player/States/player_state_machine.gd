@@ -8,6 +8,7 @@ func _ready():
 		"stop": $stop,
 		"bonk": $bonk,
 		"land": $land,
+		"fell": $fell,
 		"jump": $jump,
 	}
 

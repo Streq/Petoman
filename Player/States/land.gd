@@ -1,10 +1,9 @@
 extends "move.gd"
 
-
-var finished := false
+export (String) var animation
 
 func enter():
-	owner.get_node("AnimationPlayer").play("land")
+	owner.get_node("AnimationPlayer").play(animation)
 
 
 func update(delta):

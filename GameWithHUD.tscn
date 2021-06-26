@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="Main" type="Node2D"]
+
+[node name="layerHUD" type="CanvasLayer" parent="."]
+layer = 3

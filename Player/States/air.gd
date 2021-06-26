@@ -23,7 +23,9 @@ func update(delta):
 	p.velocity.x = lerp(p.velocity.x, p.run_max_speed*input_direction.x, 0.001)
 	
 	if p.is_on_floor():
-		if current_fall_speed > 15000:
+		if current_fall_speed > 20000:
+			emit_signal("finished", "fell", null)
+		elif current_fall_speed > 15000:
 			emit_signal("finished", "land", null)
 		elif abs(p.velocity.x) < 5000:
 			emit_signal("finished", "idle", null)

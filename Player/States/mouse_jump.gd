@@ -43,7 +43,7 @@ func enter():
 func end():
 	var dir
 
-	var p = owner as Player	
+	var p = owner as Player
 	if -aiming_at.y < abs(aiming_at.x)/2:
 		aiming_at.y = -abs(aiming_at.x)/2
 	
@@ -54,8 +54,9 @@ func end():
 	emit_signal("finished", "idle", null)
 
 func handle_input(event:InputEvent):
+	var p = owner as Player
 	if event.is_action_released("jump"):
-		aiming_at = (event.position - Vector2(get_viewport().size) * 0.5)
+		aiming_at = (event.position - (p.get_global_transform_with_canvas().origin))
 		
 		
 func update(delta):

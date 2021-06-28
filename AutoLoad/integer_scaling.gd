@@ -23,6 +23,3 @@ func _screen_resized():
 
 	# attach the viewport to the rect we calculated
 	viewport.set_attach_to_screen_rect(Rect2(diffhalf, viewport.size * scale))
-	
-	# fit window size to viewport
-	OS.window_size = viewport.size * scale

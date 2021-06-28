@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/marillo.png-fb1daea488941d1d97b08603be438bf1.stex"
+path="res://.import/dirt_tileset_no_corner.png-fa4e5b497b4dad3567f872f5f2f814ee.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/marillo.png"
-dest_files=[ "res://.import/marillo.png-fb1daea488941d1d97b08603be438bf1.stex" ]
+source_file="res://assets/dirt_tileset_no_corner.png"
+dest_files=[ "res://.import/dirt_tileset_no_corner.png-fa4e5b497b4dad3567f872f5f2f814ee.stex" ]
 
 [params]
 

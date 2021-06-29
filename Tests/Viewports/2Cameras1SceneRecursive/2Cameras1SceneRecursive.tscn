@@ -23,10 +23,10 @@ handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="TextureRect" type="TextureRect" parent="ViewportContainer/Viewport"]
-margin_left = -100.0
-margin_top = -100.0
-margin_right = 690.0
-margin_bottom = 482.0
+margin_left = -140.0
+margin_top = -134.0
+margin_right = 660.0
+margin_bottom = 448.0
 texture = SubResource( 1 )
 flip_v = true
 
@@ -35,15 +35,15 @@ flip_v = true
 [node name="ViewportContainer2" type="ViewportContainer" parent="."]
 margin_left = 587.0
 margin_top = 10.0
-margin_right = 816.0
-margin_bottom = 186.0
+margin_right = 859.0
+margin_bottom = 271.0
 stretch = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer2"]
-size = Vector2( 229, 176 )
+size = Vector2( 272, 261 )
 handle_input_locally = false
 render_target_update_mode = 3
 

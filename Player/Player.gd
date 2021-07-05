@@ -31,9 +31,13 @@ func trigger_actionable(actionable):
 
 
 func _physics_process(delta):
-	jump = Input.is_action_pressed("jump")
+	pass
 
 func _input(event):
 	if event.is_action_pressed("A"):
 		if !actionables.empty():
 			trigger_actionable(actionables[0])
+		else:
+			jump = true
+	if event.is_action_released("A"):
+		jump = false

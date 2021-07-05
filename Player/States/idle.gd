@@ -15,7 +15,7 @@ func update(delta):
 	if p.is_on_floor():
 		
 		if p.jump:
-			emit_signal("finished", "jump", input_direction.y)
+			emit_signal("finished", "jump", null)
 		elif input_direction.x:
 			emit_signal("finished", "run", null)
 		elif abs(p.velocity.x) > 10000:

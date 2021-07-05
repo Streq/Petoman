@@ -20,7 +20,7 @@ func update(delta):
 	
 	var input_direction = get_input_direction()
 	
-	p.velocity.x = lerp(p.velocity.x, p.run_max_speed*input_direction.x, 0.001)
+	p.velocity.x = lerp(p.velocity.x, p.run_max_speed*input_direction.x, 0.04)
 	
 	if p.is_on_floor():
 		if current_fall_speed > 20000:

@@ -12,11 +12,7 @@ const settings = [
 	{
 		delay = 0.2,
 		power = 1.25
-	},
-	{
-		delay = 0.5,
-		power = 2.0
-	},
+	}
 ]
 
 
@@ -38,12 +34,11 @@ func update(delta):
 	.update(delta)
 	var p = owner as Player	
 	time += delta
-	if !Input.is_action_pressed("jump"):
+	if !Input.is_action_pressed("A") or time >= 0.2:
 		for setting in settings:
 			if time < setting.delay:
 				break
 			power = setting.power
-			
 		end()
 	elif !p.is_on_floor():
 		emit_signal("finished", "air", null)

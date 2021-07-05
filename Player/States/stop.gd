@@ -16,7 +16,7 @@ func update(delta):
 		p.velocity.x = approach(p.velocity.x, 0, 25000*delta)
 #		p.velocity.x = approach(p.velocity.x, 0, 25000*delta)
 		if p.jump:
-			emit_signal("finished", "jump", input_direction.y)
+			emit_signal("finished", "jump", null)
 			pass
 		if input_direction.x == p.look_direction.x:
 			emit_signal("finished", "run", null)

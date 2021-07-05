@@ -13,20 +13,20 @@ const settings = [
 		delay = 0.2,
 		power = 1.25
 	},
-	{
-		delay = 0.5,
-		power = 2.0
-	},
-	
-	{
-		delay = 0.75,
-		power = 3.0
-	},
-	
-	{
-		delay = 1.0,
-		power = 4.0
-	},
+#	{
+#		delay = 0.5,
+#		power = 2.0
+#	},
+#
+#	{
+#		delay = 0.75,
+#		power = 3.0
+#	},
+#
+#	{
+#		delay = 1.0,
+#		power = 4.0
+#	},
 ]
 
 const aims = [
@@ -67,7 +67,7 @@ func update(delta):
 	.update(delta)
 	var p = owner as Player	
 	time += delta
-	if !Input.is_action_pressed("jump"):
+	if !Input.is_action_pressed("A") or time >= 0.2:
 		for setting in settings:
 			if time < setting.delay:
 				break

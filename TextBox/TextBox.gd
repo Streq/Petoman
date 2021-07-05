@@ -46,7 +46,7 @@ func _process(delta):
 				tween_text()
 			elif !text_queue.empty():
 				display_text()
-			else:
+			elif textbox_container.visible:
 				hide_textbox()
 		State.READING:
 			print(label.percent_visible)
@@ -83,7 +83,8 @@ func show_textbox():
 	textbox_container.show()
 
 func display_text():
-	emit_signal("text_display_started", self)
+	if !textbox_container.visible:
+		emit_signal("text_display_started", self)
 	var next_text = text_queue.pop_front()
 	label.text = next_text
 	label.lines_skipped = 0

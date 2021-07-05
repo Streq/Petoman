@@ -31,4 +31,6 @@ func _text_end(textbox):
 
 func _input(event):
 	hud.input(event)
-	world.input(event)
+	if world.is_inside_tree():
+		world.input(event)
+	pass

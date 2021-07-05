@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Autotile/Autotile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Tests/Dialogue/Actionable.tscn" type="PackedScene" id=3]
+[ext_resource path="res://TextBox/TextBox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Tests/Dialogue/Main.gd" type="Script" id=5]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Actionable" parent="World" instance=ExtResource( 3 )]
+position = Vector2( 231.488, 120.614 )
+
+[node name="Actionable2" parent="World" instance=ExtResource( 3 )]
+position = Vector2( 208.264, 120.614 )
+
+[node name="Autotile" parent="World" instance=ExtResource( 1 )]
+tile_data = PoolIntArray( 131075, 4, 65537, 131076, 4, 2, 131077, 4, 2, 131078, 4, 2, 131079, 4, 2, 131080, 4, 2, 131081, 4, 2, 131082, 4, 2, 131083, 4, 2, 131084, 4, 2, 131085, 4, 2, 131086, 4, 2, 131087, 4, 2, 131088, 4, 2, 131089, 4, 2, 131090, 4, 2, 131091, 4, 2, 131092, 4, 65539, 196611, 4, 131072, 196628, 4, 131072, 262147, 4, 131072, 262164, 4, 131072, 327683, 4, 131072, 327700, 4, 131072, 393219, 4, 131072, 393236, 4, 131072, 458755, 4, 131072, 458772, 4, 131072, 524291, 4, 131072, 524296, 4, 1, 524297, 4, 2, 524298, 4, 2, 524299, 4, 2, 524300, 4, 2, 524301, 4, 2, 524302, 4, 3, 524308, 4, 131072, 589827, 4, 131072, 589836, 2162716, 0, 589844, 4, 131072, 655363, 4, 131072, 655380, 4, 131072, 720899, 4, 131072, 720916, 4, 131072, 786435, 4, 196609, 786436, 4, 2, 786437, 4, 2, 786438, 4, 2, 786439, 4, 2, 786440, 4, 2, 786441, 4, 2, 786442, 4, 2, 786443, 4, 2, 786444, 4, 2, 786445, 4, 2, 786446, 4, 2, 786447, 4, 2, 786448, 4, 2, 786449, 4, 2, 786450, 4, 2, 786451, 4, 2, 786452, 4, 196611 )
+
+[node name="Player" parent="World" instance=ExtResource( 2 )]
+position = Vector2( 173.054, 78.6611 )
+
+[node name="TextBox" parent="." instance=ExtResource( 4 )]

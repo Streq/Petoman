@@ -7,9 +7,6 @@
 [node name="Main" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="TextBox" parent="." instance=ExtResource( 1 )]
-max_lines = 3
-
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -17,3 +14,6 @@ texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TextBox" parent="." instance=ExtResource( 1 )]
+max_lines = 3

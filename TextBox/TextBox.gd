@@ -6,6 +6,10 @@ Can't handle long messages given it lacks context regarding length of visible
 characters
 """
 
+signal text_display_started(textbox)
+signal text_display_finished(textbox)
+
+
 const CHAR_READ_RATE = 0.01
 enum State {
 	READY,
@@ -35,7 +39,7 @@ func _ready():
 func _process(delta):
 	match current_state:
 		State.READY:
-			if label.get_line_count() - label.lines_skipped > max_lines:
+			if max_lines > 0 and label.get_line_count() - label.lines_skipped > max_lines:
 				start_symbol.text = ""
 				label.lines_skipped += max_lines
 				change_state(State.READING)
@@ -46,10 +50,10 @@ func _process(delta):
 				hide_textbox()
 		State.READING:
 			print(label.percent_visible)
-			if Input.is_action_just_pressed("ui_accept"):
+			if Input.is_action_just_pressed("A"):
 				end_tween_early()
 		State.FINISHED:
-			if Input.is_action_just_pressed("ui_accept"):
+			if Input.is_action_just_pressed("A"):
 				change_state(State.READY)
 		
 """
@@ -63,11 +67,12 @@ func add_text(text: String):
 	print("adding: "+text)
 	text_queue.push_back(text)
 
-func queue_text(next_text):
-	text_queue.push_back(next_text)
-
+func add_texts(texts: PoolStringArray):
+	for text in texts:
+		add_text(text)
 
 func hide_textbox():
+	emit_signal("text_display_finished", self)
 	start_symbol.text = ""
 	end_symbol.text = ""
 	label.text = ""
@@ -78,6 +83,7 @@ func show_textbox():
 	textbox_container.show()
 
 func display_text():
+	emit_signal("text_display_started", self)
 	var next_text = text_queue.pop_front()
 	label.text = next_text
 	label.lines_skipped = 0

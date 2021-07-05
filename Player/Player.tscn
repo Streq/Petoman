@@ -137,7 +137,9 @@ tracks/0/keys = {
 "values": [ 7 ]
 }
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
 script = ExtResource( 5 )
 
 [node name="BodyPivot" type="Position2D" parent="."]

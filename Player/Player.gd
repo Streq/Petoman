@@ -1,7 +1,7 @@
 class_name Player
 extends KinematicBody2D
 
-
+signal dialog(dialogs)
 
 
 var look_direction := Vector2.RIGHT
@@ -13,10 +13,27 @@ var jump_speed := 11000
 
 var jump := false
 
+var actionables := []
 
 func _ready():
 	pass
 
+func subscribe_actionable(actionable):
+	actionables.push_back(actionable)
+	print(actionables)
+
+func unsubscribe_actionable(actionable):
+	actionables.erase(actionable)
+	print(actionables)
+
+func trigger_actionable(actionable):
+	actionable.trigger(self)
+
 
 func _physics_process(delta):
 	jump = Input.is_action_pressed("jump")
+
+func _input(event):
+	if event.is_action_pressed("A"):
+		if !actionables.empty():
+			trigger_actionable(actionables[0])

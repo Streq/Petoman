@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Tests/Viewports/GameScene.tscn" type="PackedScene" id=1]
+[ext_resource path="res://TextBox/TextBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GUI/HUD.gd" type="Script" id=3]
+[ext_resource path="res://GUI/Viewports.gd" type="Script" id=4]
+
+[node name="Viewports" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="RightPanel" type="ViewportContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 160.0
+margin_top = -106.0
+margin_right = 224.0
+margin_bottom = 102.0
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="RightPanel"]
+size = Vector2( 64, 208 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="LeftPanel" type="ViewportContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -224.0
+margin_top = -106.0
+margin_right = -160.0
+margin_bottom = 102.0
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="LeftPanel"]
+size = Vector2( 64, 208 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="MainPanel" type="ViewportContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -160.0
+margin_top = -120.0
+margin_right = 160.0
+margin_bottom = 120.0
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="MainPanel"]
+size = Vector2( 320, 240 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="HUD" type="Node2D" parent="MainPanel/Viewport"]
+script = ExtResource( 3 )
+
+[node name="TextBox" parent="MainPanel/Viewport/HUD" instance=ExtResource( 2 )]
+
+[node name="World" parent="MainPanel/Viewport/HUD" instance=ExtResource( 1 )]
+
+[connection signal="set_world" from="." to="MainPanel/Viewport/HUD" method="_set_world"]

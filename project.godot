@@ -29,7 +29,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-IntegerScaling="*res://AutoLoad/integer_scaling.gd"
+IntegerScaling="res://AutoLoad/integer_scaling.gd"
 BranchPause="*res://AutoLoad/branch_pause.gd"
 
 [display]

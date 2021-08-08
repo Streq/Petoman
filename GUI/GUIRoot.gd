@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal set_world(world)
+
 # don't forget to use stretch mode 'viewport' and aspect 'ignore'
 onready var viewport = $ScreenViewport/Viewport
 onready var viewport_container = $ScreenViewport
@@ -20,3 +22,6 @@ func _screen_resized():
 	var scale = max(1, min(scale_x, scale_y))
 
 	viewport_container.rect_scale = Vector2(1,1)*scale
+
+func set_world(world):
+	emit_signal("set_world",world)

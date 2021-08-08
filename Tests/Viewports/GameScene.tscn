@@ -32,7 +32,6 @@ position = Vector2( 173.469, 260.544 )
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 7.56002, -14.7256 )
 current = true
-zoom = Vector2( 2, 2 )
 editor_draw_drag_margin = true
 
 [node name="Player" parent="." instance=ExtResource( 1 )]

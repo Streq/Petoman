@@ -1,9 +1,7 @@
 extends Node
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+#All this does is test the set_world() method for GUIRoot, 
+#so that you can change scenes within the same GUI
 
 
 # Called when the node enters the scene tree for the first time.

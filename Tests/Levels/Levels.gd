@@ -17,9 +17,9 @@ export (PackedScene) var World2:PackedScene
 func _ready():
 	var world1 = World1.instance()
 	$GUIRoot.set_world(world1)
-	world1.connect("next_world", self, "_next_world")
+	SignalSingleton.connect("goto_world", self, "_goto_world")
 	
-	pass # Replace with function body.
+	
 
-func _next_world():
-	$GUIRoot.set_world(World2.instance())
+func _goto_world(world):
+	$GUIRoot.set_world(world.instance())

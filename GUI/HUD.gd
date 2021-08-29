@@ -7,15 +7,16 @@ onready var world = $World
 func _ready():
 	$TextBox.connect("text_display_started",self,"_text_start")
 	$TextBox.connect("text_display_finished",self,"_text_end")
+	SignalSingleton.connect("goto_world",self,"_set_world")
 	_connect_signals()
 	pass # Replace with function body.
 
 func _text_start(textbox):
-	BranchPause.pause_scene($World, true)
+	BranchPause.pause_scene(world, true)
 	pass
 
 func _text_end(textbox):
-	BranchPause.pause_scene($World, false)
+	BranchPause.pause_scene(world, false)
 	pass
 
 func _connect_signals():
@@ -26,6 +27,6 @@ func _connect_signals():
 
 func _set_world(world):
 	remove_child(self.world)
-	self.world = world
-	add_child(world)
+	self.world = world.instance()
+	add_child(self.world)
 	_connect_signals()

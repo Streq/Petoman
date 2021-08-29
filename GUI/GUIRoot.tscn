@@ -44,5 +44,3 @@ __meta__ = {
 position = Vector2( 640, 400 )
 
 [node name="Viewports" parent="ScreenViewport/Viewport/Center" instance=ExtResource( 2 )]
-
-[connection signal="set_world" from="." to="ScreenViewport/Viewport/Center/Viewports" method="_set_world"]

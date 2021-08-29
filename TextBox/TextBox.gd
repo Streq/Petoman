@@ -67,7 +67,7 @@ func add_text(text: String):
 	print("adding: "+text)
 	text_queue.push_back(text)
 
-func add_texts(texts: PoolStringArray):
+func add_texts(texts):
 	for text in texts:
 		add_text(text)
 

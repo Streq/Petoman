@@ -66,3 +66,4 @@ render_target_update_mode = 3
 script = ExtResource( 3 )
 
 [node name="TextBox" parent="MainPanel/Viewport/HUD" instance=ExtResource( 2 )]
+max_lines = 3

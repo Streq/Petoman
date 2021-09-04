@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Autotile/Autotile.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -7,34 +7,22 @@
 [ext_resource path="res://assets/door.png" type="Texture" id=5]
 [ext_resource path="res://WorldObjects/Portal/Portal.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Levels/1/Level1.tscn" type="PackedScene" id=7]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 100.521, 10 )
+[ext_resource path="res://GridSnap/SnapCamera.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 3.00456, 2.78101 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 100.521, 10 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 3 )
 
 [node name="Autotile" parent="." instance=ExtResource( 1 )]
-tile_data = PoolIntArray( 65538, 4, 65537, 65539, 4, 2, 65540, 4, 2, 65541, 4, 2, 65542, 4, 2, 65543, 4, 2, 65544, 4, 2, 65545, 4, 2, 65546, 4, 2, 65547, 4, 2, 65548, 4, 2, 65549, 4, 2, 65550, 4, 2, 65551, 4, 2, 65552, 4, 65539, 131074, 4, 131072, 131076, 2162716, 0, 131088, 4, 131072, 196610, 4, 131072, 196624, 4, 131072, 262146, 4, 131072, 262160, 4, 131072, 327682, 4, 131072, 327696, 4, 131072, 393218, 4, 131072, 393232, 4, 131072, 458754, 4, 131072, 458768, 4, 131072, 524290, 4, 131072, 524304, 4, 131072, 589826, 4, 196609, 589827, 4, 2, 589828, 4, 2, 589829, 4, 2, 589830, 4, 2, 589831, 4, 2, 589832, 4, 2, 589833, 4, 2, 589834, 4, 2, 589835, 4, 2, 589836, 4, 2, 589837, 4, 2, 589838, 4, 2, 589839, 4, 2, 589840, 4, 196611 )
-
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 81.9609, 116.186 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2( 153.216, 152.655 )
-script = ExtResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 1 )
+tile_data = PoolIntArray( -262151, 4, 65537, -262150, 4, 2, -262149, 4, 2, -262148, 4, 2, -262147, 4, 2, -262146, 4, 2, -262145, 4, 2, -327680, 4, 2, -327679, 4, 2, -327678, 4, 2, -327677, 4, 2, -327676, 4, 2, -327675, 4, 2, -327674, 4, 2, -327673, 4, 65539, -196615, 4, 131072, -196613, 2162716, 0, -262137, 4, 131072, -131079, 4, 131072, -196601, 4, 131072, -65543, 4, 131072, -131065, 4, 131072, -7, 4, 131072, -65529, 4, 131072, 65529, 4, 131072, 7, 4, 131072, 131065, 4, 131072, 65543, 4, 131072, 196601, 4, 131072, 131079, 4, 131072, 262137, 4, 196609, 262138, 4, 2, 262139, 4, 2, 262140, 4, 2, 262141, 4, 2, 262142, 4, 2, 262143, 4, 2, 196608, 4, 2, 196609, 4, 2, 196610, 4, 2, 196611, 4, 2, 196612, 4, 2, 196613, 4, 2, 196614, 4, 2, 196615, 4, 196611 )
 
 [node name="Door" type="Sprite" parent="."]
-position = Vector2( 224, 137 )
+position = Vector2( 95.9115, 41.073 )
 texture = ExtResource( 5 )
 
 [node name="Portal" parent="Door" instance=ExtResource( 6 )]
@@ -43,4 +31,22 @@ next_world = ExtResource( 7 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door/Portal"]
 shape = SubResource( 2 )
 
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( -25.1276, 36.259 )
+
+[node name="Position2D" parent="Player" instance=ExtResource( 8 )]
+
+[node name="Camera2D" parent="Player/Position2D" index="0"]
+current = true
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 46.1275, 72.728 )
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -33.5951, -15.4597 )
+shape = SubResource( 1 )
+
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_body_entered"]
+
+[editable path="Player/Position2D"]

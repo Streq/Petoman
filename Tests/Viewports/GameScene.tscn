@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Autotile/Autotile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Tests/Dialogue/Actionable.tscn" type="PackedScene" id=3]
+[ext_resource path="res://GridSnap/SnapCamera.tscn" type="PackedScene" id=4]
 
 [node name="GameScene" type="Node"]
 
@@ -31,8 +32,14 @@ position = Vector2( 173.469, 260.544 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 7.56002, -14.7256 )
-current = true
 editor_draw_drag_margin = true
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 7.56002, -14.7256 )
+
+[node name="Position2D" parent="Player" instance=ExtResource( 4 )]
+
+[node name="Camera2D" parent="Player/Position2D" index="0"]
+current = true
+
+[editable path="Player/Position2D"]

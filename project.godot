@@ -29,8 +29,9 @@ config/icon="res://icon.png"
 
 [autoload]
 
-IntegerScaling="res://AutoLoad/integer_scaling.gd"
 BranchPause="*res://AutoLoad/branch_pause.gd"
+SignalSingleton="*res://AutoLoad/signal_singleton.gd"
+IntegerScaling="res://AutoLoad/integer_scaling.gd"
 
 [display]
 

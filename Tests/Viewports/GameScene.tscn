@@ -38,6 +38,8 @@ editor_draw_drag_margin = true
 position = Vector2( 7.56002, -14.7256 )
 
 [node name="Position2D" parent="Player" instance=ExtResource( 4 )]
+position = Vector2( 48, 0 )
+grid_size = Vector2( 320, 240 )
 
 [node name="Camera2D" parent="Player/Position2D" index="0"]
 current = true

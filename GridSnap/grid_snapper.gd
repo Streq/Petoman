@@ -3,7 +3,7 @@ extends Position2D
 
 export(Vector2) var grid_size := Vector2() setget _set_grid_size
 
-export(int) var editor_grid_border_tiles := 1 setget _set_editor_grid_border_tiles
+export(int) var editor_grid_border_tiles := 3 setget _set_editor_grid_border_tiles
 
 var grid_position:= Vector2()
 var editor_position:= Vector2()

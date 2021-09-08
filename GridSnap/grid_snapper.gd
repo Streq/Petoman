@@ -2,8 +2,9 @@ tool
 extends Position2D
 
 export(Vector2) var grid_size := Vector2() setget _set_grid_size
-
 export(int) var editor_grid_border_tiles := 3 setget _set_editor_grid_border_tiles
+export(bool) var visible_in_editor := true setget _set_visible_in_editor
+
 
 var grid_position:= Vector2()
 var editor_position:= Vector2()
@@ -49,12 +50,9 @@ func calc_grid_position(_position):
 	var y = round(_position.y / grid_size.y)
 	return  Vector2(x, y)
 
-func _set_editor_grid_border_tiles(size:int):
-	editor_grid_border_tiles = size
-	update()
 
 func _draw():
-	if Engine.editor_hint:
+	if self.visible_in_editor and visible_in_editor:
 		var start_grid_position = editor_grid_position - Vector2(1,1)*editor_grid_border_tiles
 		for x in range(0, editor_grid_border_tiles*2+1):
 			for y in range(0, editor_grid_border_tiles*2+1):
@@ -66,4 +64,12 @@ func draw_grid_tile(_position):
 
 func _set_grid_size(gridsize):
 	grid_size = gridsize
+	update()
+
+func _set_editor_grid_border_tiles(size:int):
+	editor_grid_border_tiles = size
+	update()
+
+func _set_visible_in_editor(_visible:bool):
+	visible_in_editor = _visible
 	update()

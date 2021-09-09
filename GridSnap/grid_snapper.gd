@@ -13,11 +13,10 @@ onready var parent = get_parent()
 
 func _ready():
 	set_as_toplevel(true)
-	if grid_size == Vector2():
-		grid_size = get_viewport_rect().size
-	
-	
 	if not Engine.editor_hint:
+		if grid_size == Vector2():
+			grid_size = get_viewport_rect().size
+
 		update_grid_position(parent.position)
 	
 func _physics_process(delta):

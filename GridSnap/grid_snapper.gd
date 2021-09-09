@@ -5,7 +5,6 @@ export(Vector2) var grid_size := Vector2() setget _set_grid_size
 export(int) var editor_grid_border_tiles := 3 setget _set_editor_grid_border_tiles
 export(bool) var visible_in_editor := true setget _set_visible_in_editor
 
-
 var grid_position:= Vector2()
 var editor_position:= Vector2()
 var editor_grid_position:= Vector2()
@@ -52,7 +51,7 @@ func calc_grid_position(_position):
 
 
 func _draw():
-	if self.visible_in_editor and visible_in_editor:
+	if Engine.editor_hint and visible_in_editor:
 		var start_grid_position = editor_grid_position - Vector2(1,1)*editor_grid_border_tiles
 		for x in range(0, editor_grid_border_tiles*2+1):
 			for y in range(0, editor_grid_border_tiles*2+1):

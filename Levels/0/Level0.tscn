@@ -9,10 +9,10 @@
 [ext_resource path="res://Levels/1/Level1.tscn" type="PackedScene" id=7]
 [ext_resource path="res://GridSnap/SnapCamera.tscn" type="PackedScene" id=8]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3.00456, 2.78101 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 100.521, 10 )
 
 [node name="Node2D" type="Node2D"]
@@ -29,7 +29,7 @@ texture = ExtResource( 5 )
 next_world = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door/Portal"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( -25.1276, 36.259 )
@@ -45,7 +45,7 @@ script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -33.5951, -15.4597 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_body_entered"]
 

@@ -148,7 +148,7 @@ script = ExtResource( 5 )
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 2
-frame = 6
+frame = 13
 
 [node name="collisionShape" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.5 )
@@ -171,34 +171,34 @@ anims/land = SubResource( 8 )
 anims/run = SubResource( 9 )
 anims/stop = SubResource( 10 )
 
-[node name="States" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 10 )
 START_STATE = NodePath("idle")
 
-[node name="idle" type="Node" parent="States"]
+[node name="idle" type="Node" parent="StateMachine"]
 script = ExtResource( 4 )
 
-[node name="run" type="Node" parent="States"]
+[node name="run" type="Node" parent="StateMachine"]
 script = ExtResource( 8 )
 
-[node name="air" type="Node" parent="States"]
+[node name="air" type="Node" parent="StateMachine"]
 script = ExtResource( 6 )
 
-[node name="bonk" type="Node" parent="States"]
+[node name="bonk" type="Node" parent="StateMachine"]
 script = ExtResource( 3 )
 
-[node name="stop" type="Node" parent="States"]
+[node name="stop" type="Node" parent="StateMachine"]
 script = ExtResource( 9 )
 
-[node name="land" type="Node" parent="States"]
+[node name="land" type="Node" parent="StateMachine"]
 script = ExtResource( 2 )
 animation = "land"
 
-[node name="fell" type="Node" parent="States"]
+[node name="fell" type="Node" parent="StateMachine"]
 script = ExtResource( 2 )
 animation = "fell"
 
-[node name="jump" type="Node" parent="States"]
+[node name="jump" type="Node" parent="StateMachine"]
 script = ExtResource( 7 )
 
-[connection signal="animation_finished" from="AnimationPlayer" to="States" method="_on_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine" method="_on_animation_finished"]

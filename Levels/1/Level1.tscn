@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Autotile/Autotile.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://GridSnap/SnapCamera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/door.png" type="Texture" id=4]
+[ext_resource path="res://Levels/1/DeathCutscene.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 105.752, 10 )
@@ -27,8 +28,12 @@ current = true
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( 906.127, 490.414 )
+script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]
 
 [editable path="Player/Position2D"]

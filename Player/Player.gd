@@ -11,6 +11,9 @@ var gravity := 20000
 var run_max_speed := 10000
 var jump_speed := 11000
 
+onready var state_machine = $StateMachine
+onready var animation_player = $AnimationPlayer
+
 var jump := false
 
 var actionables := []

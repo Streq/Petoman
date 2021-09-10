@@ -14,8 +14,7 @@ onready var parent = get_parent()
 func _ready():
 	set_as_toplevel(true)
 	if not Engine.editor_hint:
-		if grid_size == Vector2():
-			grid_size = get_viewport_rect().size
+		grid_size = get_viewport_rect().size
 
 		update_grid_position(parent.position)
 	

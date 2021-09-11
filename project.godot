@@ -43,10 +43,15 @@ config/icon="res://icon.png"
 
 BranchPause="*res://AutoLoad/branch_pause.gd"
 SignalSingleton="*res://AutoLoad/signal_singleton.gd"
+MusicPlayer="*res://AutoLoad/MusicPlayer.tscn"
 
 [display]
 
 window/size/height=608
+
+[global]
+
+Music=false
 
 [input]
 

@@ -14,7 +14,7 @@ func _screen_resized():
 
 	# see how big the window is compared to the viewport size
 	# floor it so we only get round numbers (0, 1, 2, 3 ...)
-	var scale_x = floor(window_size.x / (480))
+	var scale_x = floor(window_size.x / (320))
 	var scale_y = floor(window_size.y / (240))
 
 	# use the smaller scale with 1x minimum scale

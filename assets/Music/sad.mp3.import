@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/sad.mp3-1cd47c08a3e89030b12a85630791405b.mp3str"
+
+[deps]
+
+source_file="res://assets/Music/sad.mp3"
+dest_files=[ "res://.import/sad.mp3-1cd47c08a3e89030b12a85630791405b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

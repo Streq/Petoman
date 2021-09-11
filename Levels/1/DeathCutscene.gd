@@ -1,10 +1,11 @@
 extends Area2D
 
 
-var player:Player = null
+var player: Player = null
+var triggered: bool = false
 
 func _physics_process(delta):
-	if player:
+	if player and !triggered:
 		var state_machine:StateMachine = player.state_machine
 		if state_machine.current_state.name == "fell":
 			yield(get_tree().create_timer(0.01), "timeout")
@@ -21,6 +22,9 @@ func _on_body_exited(body):
 
 
 func trigger_cutscene():
-# Doesn't work because children will still update
-#	player.set_physics_process(false)
+	triggered = true
 	BranchPause.pause_scene(player, true)
+	yield(get_tree().create_timer(1),"timeout")
+	MusicPlayer.play("sad")
+	yield(get_tree().create_timer(2),"timeout")
+	$Credits.show()

@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Autotile/Autotile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Autotile/AutotileWalls.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Levels/0/Level0.gd" type="Script" id=3]
 [ext_resource path="res://Levels/0/TextArea.gd" type="Script" id=4]
@@ -22,16 +22,16 @@ script = ExtResource( 3 )
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
-offset = Vector2( 0, -10 )
-transform = Transform2D( 1, 0, 0, 1, 0, -10 )
+offset = Vector2( 0, -8 )
+transform = Transform2D( 1, 0, 0, 1, 0, -8 )
 follow_viewport_enable = true
 
 [node name="Sprite" type="Sprite" parent="Background"]
 texture = ExtResource( 9 )
 
 [node name="Foreground" type="CanvasLayer" parent="."]
-offset = Vector2( 0, -10 )
-transform = Transform2D( 1, 0, 0, 1, 0, -10 )
+offset = Vector2( 0, -8 )
+transform = Transform2D( 1, 0, 0, 1, 0, -8 )
 follow_viewport_enable = true
 
 [node name="Sprite" type="Sprite" parent="Foreground"]

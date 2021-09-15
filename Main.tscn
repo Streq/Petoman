@@ -2,7 +2,7 @@
 
 [ext_resource path="res://GUI/GUIRoot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
-[ext_resource path="res://Levels/0/Level0.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Title.tscn" type="PackedScene" id=3]
 
 [node name="Root" type="CanvasLayer"]
 script = ExtResource( 2 )

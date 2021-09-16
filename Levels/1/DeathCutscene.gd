@@ -28,3 +28,5 @@ func trigger_cutscene():
 	MusicPlayer.play("sad")
 	yield(get_tree().create_timer(2),"timeout")
 	$Credits.show()
+	yield(get_tree().create_timer(2),"timeout")
+	SignalSingleton.emit_signal("push_scene",ScenesSingleton.retry)

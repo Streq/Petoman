@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://AutoLoad/scenes_singleton.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Title/Title.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Retry/Retry.tscn" type="PackedScene" id=3]
+
+[node name="Node" type="Node"]
+script = ExtResource( 1 )
+menu = ExtResource( 2 )
+retry = ExtResource( 3 )

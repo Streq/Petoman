@@ -4,6 +4,8 @@ extends Area2D
 var player: Player = null
 var triggered: bool = false
 
+
+
 func _physics_process(delta):
 	if player and !triggered:
 		trigger_cutscene()
@@ -22,3 +24,4 @@ func trigger_cutscene():
 	$Mariyo.visible = true
 	var pj : Player = player
 	pj.velocity.x = -50000
+	$sound.play()

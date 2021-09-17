@@ -24,6 +24,7 @@ func _on_body_exited(body):
 func trigger_cutscene():
 	triggered = true
 	BranchPause.pause_scene(player, true)
+	$sound.play()
 	yield(get_tree().create_timer(1),"timeout")
 	MusicPlayer.play("sad")
 	yield(get_tree().create_timer(2),"timeout")

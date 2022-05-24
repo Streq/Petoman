@@ -23,11 +23,11 @@ func _ready():
 
 func subscribe_actionable(actionable):
 	actionables.push_back(actionable)
-	print(actionables)
+	print_debug(actionables)
 
 func unsubscribe_actionable(actionable):
 	actionables.erase(actionable)
-	print(actionables)
+	print_debug(actionables)
 
 func trigger_actionable(actionable):
 	actionable.trigger(self)

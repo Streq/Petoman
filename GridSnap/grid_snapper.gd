@@ -60,7 +60,8 @@ func draw_grid_tile(_position):
 	draw_rect(Rect2(_position-grid_size/2,grid_size), Color.red, false, 1, false)
 
 func _set_grid_size(gridsize):
-	grid_size = gridsize
+	if gridsize:
+		grid_size = gridsize
 	update()
 
 func _set_editor_grid_border_tiles(size:int):

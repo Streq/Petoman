@@ -30,7 +30,7 @@ var current_state = State.READY
 var text_queue = []
 
 func _ready():
-	print("Start State.READY")
+	print_debug("Start State.READY")
 	label.max_lines_visible = max_lines
 	hide_textbox()
 	return
@@ -49,7 +49,7 @@ func _process(delta):
 			elif textbox_container.visible:
 				hide_textbox()
 		State.READING:
-			print(label.percent_visible)
+			print_debug(label.percent_visible)
 			if Input.is_action_just_pressed("A"):
 				end_tween_early()
 		State.FINISHED:
@@ -64,7 +64,7 @@ the thing is that wordwrap doesn't give us a consistent length, different
 texts with the same character length can take up a different amount of lines
 """
 func add_text(text: String):
-	print("adding: "+text)
+	print_debug("adding: "+text)
 	text_queue.push_back(text)
 
 func add_texts(texts):
@@ -98,13 +98,13 @@ func change_state(next_state):
 	current_state = next_state
 	match current_state:
 		State.READY:
-			print("Changing state to: State.READY")
+			print_debug("Changing state to: State.READY")
 			pass
 		State.READING:
-			print("Changing state to: State.READING")
+			print_debug("Changing state to: State.READING")
 			pass
 		State.FINISHED:
-			print("Changing state to: State.FINISHED")
+			print_debug("Changing state to: State.FINISHED")
 			pass
 
 func tween_text():

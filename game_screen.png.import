@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Petoman.png-e914f6729d8c4bd4020955701ad687ef.stex"
+path="res://.import/game_screen.png-cde1246ab8e062a9d4e8a2e800ff358a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Petoman.png"
-dest_files=[ "res://.import/Petoman.png-e914f6729d8c4bd4020955701ad687ef.stex" ]
+source_file="res://game_screen.png"
+dest_files=[ "res://.import/game_screen.png-cde1246ab8e062a9d4e8a2e800ff358a.stex" ]
 
 [params]
 

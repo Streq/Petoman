@@ -45,7 +45,7 @@ jobs:
       - name: Export Windows Port
         run: |
           mkdir ./exports/windows
-          ./godot --path ./project.godot --export "Windows Desktop" ./exports/windows/$PROJECT_NAME.exe
+          ./godot --path ./project.godot --export "Windows" ./exports/windows/$PROJECT_NAME.exe
       - name: Export Mac Port
         run: |
           mkdir ./exports/mac

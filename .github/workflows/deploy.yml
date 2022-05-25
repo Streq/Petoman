@@ -17,7 +17,8 @@ env:
   ITCH_USERNAME: "streq"
   GODOT_VERSION: "3.4.4"
   RELEASE_LINUX: true
-  RELEASE_WINDOWS: true
+  RELEASE_WINDOWS: false
+  RELEASE_MAC: false
   RELEASE_HTML5: true
 
 jobs:
@@ -47,22 +48,22 @@ jobs:
         run: |
           mkdir exports
       - name: Export Windows Port
-        if: ${{ env.RELEASE_WINDOWS }}
+        if: ${{ env.RELEASE_WINDOWS == 'true' }}
         run: |
           mkdir ./exports/windows
           ./godot --path ./project.godot --export "Windows" ./exports/windows/$PROJECT_NAME.exe
       - name: Export Linux Port
-        if: ${{ env.RELEASE_LINUX }}
+        if: ${{ env.RELEASE_LINUX == 'true' }}
         run: |
           mkdir ./exports/linux
           ./godot --path ./project.godot --export "Linux" ./exports/linux/$PROJECT_NAME.x86_64
       - name: Export Mac Port
-        if: ${{ env.RELEASE_MAC }}
+        if: ${{ env.RELEASE_MAC == 'true' }}
         run: |
           mkdir ./exports/mac
           ./godot --path ./project.godot --export "Mac" ./exports/mac/$PROJECT_NAME.zip
       - name: Export HTML5 Port
-        if: ${{ env.RELEASE_HTML5 }}
+        if: ${{ env.RELEASE_HTML5 == 'true' }}
         run: |
           mkdir ./exports/html
           ./godot --path ./project.godot --export "HTML5" ./exports/html/index.html
@@ -88,18 +89,8 @@ jobs:
         with:
           name: exports
           path: exports
-      - name: Zip Windows Export
-        if: ${{ env.RELEASE_WINDOWS }}
-        run: zip -r exports/windows.zip exports/windows
-      - name: Zip Linux Export
-        if: ${{ env.RELEASE_LINUX }}
-        run: zip -r exports/linux.zip exports/linux
-      - name: Zip Mac Export
-        if: ${{ env.RELEASE_MAC }}
-        run: zip -r exports/mac.zip exports/mac
-      - name: Zip HTML5 Export
-        if: ${{ env.RELEASE_HTML5 }}
-        run: zip -r exports/html.zip exports/html
+      - name: Zip Exports
+        run: for file in exports/*; do zip -r ${file%.*}.zip $file; done
       - name: Read Version Number
         id: version_number
         uses: juliangruber/read-file-action@v1
@@ -149,11 +140,17 @@ jobs:
       - name: Login To Butler
         run: ./butler login
       - name: Push Windows Export To Itch
-        run: ./butler push ./exports/windows/$PROJECT_NAME.exe $ITCH_USERNAME/$ITCH_PROJECT_NAME:win --userversion-file ./exports/VERSION
+        if: ${{ env.RELEASE_WINDOWS == 'true' }}
+        run: ./butler push ./exports/windows.zip $ITCH_USERNAME/$ITCH_PROJECT_NAME:win --userversion-file ./exports/VERSION
       - name: Push Mac Export To Itch
-        run: ./butler push ./exports/mac/$PROJECT_NAME.zip $ITCH_USERNAME/$ITCH_PROJECT_NAME:mac --userversion-file ./exports/VERSION
+        if: ${{ env.RELEASE_MAC == 'true' }}
+        run: ./butler push ./exports/mac.zip $ITCH_USERNAME/$ITCH_PROJECT_NAME:mac --userversion-file ./exports/VERSION
       - name: Push Linux Export To Itch
-        run: ./butler push ./exports/linux/$PROJECT_NAME.x86_64 $ITCH_USERNAME/$ITCH_PROJECT_NAME:linux --userversion-file ./exports/VERSION
+        if: ${{ env.RELEASE_LINUX == 'true' }}
+        run: ./butler push ./exports/linux.zip $ITCH_USERNAME/$ITCH_PROJECT_NAME:linux --userversion-file ./exports/VERSION
+      - name: Push HTML5 Export To Itch
+        if: ${{ env.RELEASE_HTML5 == 'true' }}
+        run: ./butler push ./exports/html.zip $ITCH_USERNAME/$ITCH_PROJECT_NAME:html --userversion-file ./exports/VERSION
   AlertPipelineResult:
     needs: [BuildAndPublish, CreateNewGithubRelease, PushExportsToItch]
     if: ${{ always() }}

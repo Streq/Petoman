@@ -15,6 +15,7 @@ env:
   PROJECT_NAME: "Petoman"
   ITCH_PROJECT_NAME: "petoman"
   ITCH_USERNAME: "streq"
+  GODOT_VERSION: "3.4.4"
 
 jobs:
   BuildAndPublish:
@@ -26,19 +27,19 @@ jobs:
           fetch-depth: 0
       - name: Download + Authorize Godot
         run: |
-          curl -L -o godot.zip https://downloads.tuxfamily.org/godotengine/3.4.4/Godot_v3.4.4-stable_linux_headless.64.zip
+          curl -L -o godot.zip https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_linux_headless.64.zip
           unzip godot.zip
-          mv Godot_v3.4.4-stable_linux_headless.64 godot
+          mv Godot_v${GODOT_VERSION}-stable_linux_headless.64 godot
           ls
           chmod +x godot
       - name: Download Export Templates
         run: |
-          curl -L -o export_templates.zip https://downloads.tuxfamily.org/godotengine/3.4.4/Godot_v3.4.4-stable_export_templates.tpz
+          curl -L -o export_templates.zip https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
           unzip export_templates.zip
       - name: Install Export Templates
         run: |
-          mkdir -p ~/.local/share/godot/templates/3.4.4.stable
-          mv ./templates/* ~/.local/share/godot/templates/3.4.4.stable
+          mkdir -p ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          mv ./templates/* ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Make Exports Folder
         run: |
           mkdir exports

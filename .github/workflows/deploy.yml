@@ -16,6 +16,10 @@ env:
   ITCH_PROJECT_NAME: "petoman"
   ITCH_USERNAME: "streq"
   GODOT_VERSION: "3.4.4"
+  RELEASE_LINUX: true
+  RELEASE_WINDOWS: true
+  RELEASE_MAC: true
+  RELEASE_HTML5: true
 
 jobs:
   BuildAndPublish:
@@ -44,17 +48,25 @@ jobs:
         run: |
           mkdir exports
       - name: Export Windows Port
+        if: $RELEASE_WINDOWS
         run: |
           mkdir ./exports/windows
           ./godot --path ./project.godot --export "Windows" ./exports/windows/$PROJECT_NAME.exe
       - name: Export Linux Port
+        if: $RELEASE_LINUX
         run: |
           mkdir ./exports/linux
           ./godot --path ./project.godot --export "Linux" ./exports/linux/$PROJECT_NAME.x86_64
       - name: Export Mac Port
+        if: $RELEASE_MAC
         run: |
           mkdir ./exports/mac
           ./godot --path ./project.godot --export "Mac" ./exports/mac/$PROJECT_NAME.zip
+      - name: Export HTML5 Port
+        if: $RELEASE_HTML5
+        run: |
+          mkdir ./exports/html
+          ./godot --path ./project.godot --export "HTML5" ./exports/html/index.html
       - name: Add Version Number to Exports
         run: |
           cp ./VERSION ./exports/VERSION
@@ -77,11 +89,18 @@ jobs:
         with:
           name: exports
           path: exports
-      - name: Zip Exports
-        run: |
-          zip -r windows.zip exports/windows
-          zip -r linux.zip exports/linux
-          zip -r mac.zip exports/mac
+      - name: Zip Windows Export
+        if: $RELEASE_WINDOWS
+        run: zip -r exports/windows.zip exports/windows
+      - name: Zip Linux Export
+        if: $RELEASE_LINUX
+        run: zip -r exports/linux.zip exports/linux
+      - name: Zip Mac Export
+        if: $RELEASE_MAC
+        run: zip -r exports/mac.zip exports/mac
+      - name: Zip HTML5 Export
+        if: $RELEASE_HTML5
+        run: zip -r exports/html.zip exports/html
       - name: Read Version Number
         id: version_number
         uses: juliangruber/read-file-action@v1
@@ -148,7 +167,7 @@ jobs:
         run: |
           curl --location --request POST $DISCORD_WEBHOOK \
             --header 'Content-Type: application/json' \
-            --data-raw "{\"content\": \"$PROJECT_NAME v${{ steps.version_number.outputs.content }} has successfully released and deployed!\"}"
+            --data-raw "{\"content\": \"$PROJECT_NAME has successfully released and deployed!\"}"
       - name: Send Discord Failure Message
         if: ${{ env.IS_MAIN && env.DID_PREV_JOBS_SUCCEED != 'true' }}
         run: |

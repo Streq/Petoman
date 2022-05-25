@@ -63,7 +63,7 @@ jobs:
           mkdir ./exports/mac
           ./godot --path ./project.godot --export "Mac" ./exports/mac/$PROJECT_NAME.zip
       - name: Export HTML5 Port
-        if: if: ${{ env.RELEASE_HTML5 }}
+        if: ${{ env.RELEASE_HTML5 }}
         run: |
           mkdir ./exports/html
           ./godot --path ./project.godot --export "HTML5" ./exports/html/index.html

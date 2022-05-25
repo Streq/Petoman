@@ -111,10 +111,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.version_number.outputs.content }}
-          files: |
-            exports/windows.zip
-            exports/linux.zip
-            exports/mac.zip
+          files: exports/*
   PushExportsToItch:
     needs: BuildAndPublish
     if: ${{ contains(github.ref, 'main') }}

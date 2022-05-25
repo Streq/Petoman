@@ -67,6 +67,11 @@ jobs:
         run: |
           mkdir ./exports/html
           ./godot --path ./project.godot --export "HTML5" ./exports/html/index.html
+      - name: Zip Exports
+        run: |
+          for file in exports/*; do zip -r ${file%.*}.zip $file; done
+          ls -a
+          ls exports -a
       - name: Add Version Number to Exports
         run: |
           cp ./VERSION ./exports/VERSION
@@ -89,11 +94,6 @@ jobs:
         with:
           name: exports
           path: exports
-      - name: Zip Exports
-        run: |
-          for file in exports/*; do zip -r ${file%.*}.zip $file; done
-          ls -a
-          ls exports -a
       - name: Read Version Number
         id: version_number
         uses: juliangruber/read-file-action@v1

@@ -48,22 +48,22 @@ jobs:
         run: |
           mkdir exports
       - name: Export Windows Port
-        if: $RELEASE_WINDOWS
+        if: ${{ env.RELEASE_WINDOWS }}
         run: |
           mkdir ./exports/windows
           ./godot --path ./project.godot --export "Windows" ./exports/windows/$PROJECT_NAME.exe
       - name: Export Linux Port
-        if: $RELEASE_LINUX
+        if: ${{ env.RELEASE_LINUX }}
         run: |
           mkdir ./exports/linux
           ./godot --path ./project.godot --export "Linux" ./exports/linux/$PROJECT_NAME.x86_64
       - name: Export Mac Port
-        if: $RELEASE_MAC
+        if: ${{ env.RELEASE_MAC }}
         run: |
           mkdir ./exports/mac
           ./godot --path ./project.godot --export "Mac" ./exports/mac/$PROJECT_NAME.zip
       - name: Export HTML5 Port
-        if: $RELEASE_HTML5
+        if: if: ${{ env.RELEASE_HTML5 }}
         run: |
           mkdir ./exports/html
           ./godot --path ./project.godot --export "HTML5" ./exports/html/index.html
@@ -90,16 +90,16 @@ jobs:
           name: exports
           path: exports
       - name: Zip Windows Export
-        if: $RELEASE_WINDOWS
+        if: ${{ env.RELEASE_WINDOWS }}
         run: zip -r exports/windows.zip exports/windows
       - name: Zip Linux Export
-        if: $RELEASE_LINUX
+        if: ${{ env.RELEASE_LINUX }}
         run: zip -r exports/linux.zip exports/linux
       - name: Zip Mac Export
-        if: $RELEASE_MAC
+        if: ${{ env.RELEASE_MAC }}
         run: zip -r exports/mac.zip exports/mac
       - name: Zip HTML5 Export
-        if: $RELEASE_HTML5
+        if: ${{ env.RELEASE_HTML5 }}
         run: zip -r exports/html.zip exports/html
       - name: Read Version Number
         id: version_number

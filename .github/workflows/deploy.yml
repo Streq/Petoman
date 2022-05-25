@@ -16,7 +16,7 @@ env:
   ITCH_PROJECT_NAME: "petoman"
   ITCH_USERNAME: "streq"
   GODOT_VERSION: "3.4.4"
-  RELEASE_LINUX: true
+  RELEASE_LINUX: false
   RELEASE_WINDOWS: false
   RELEASE_MAC: false
   RELEASE_HTML5: true
@@ -90,7 +90,10 @@ jobs:
           name: exports
           path: exports
       - name: Zip Exports
-        run: for file in exports/*; do zip -r ${file%.*}.zip $file; done
+        run: |
+          for file in exports/*; do zip -r ${file%.*}.zip $file; done
+          ls -a
+          ls exports -a
       - name: Read Version Number
         id: version_number
         uses: juliangruber/read-file-action@v1

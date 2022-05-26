@@ -96,7 +96,9 @@ jobs:
           ./godot --path ./project.godot --export "HTML5" ./exports/html/index.html
       - name: Zip Exports
         run: |
-          for file in exports/*; do zip -r "${ITCH_PROJECT_NAME}_${file%.*}_${{ steps.versioning.outputs.version }}.zip" $file; rm -rf $file; done
+          cd exports
+          for file in *; do zip -r "${ITCH_PROJECT_NAME}_${file%.*}_${{ steps.versioning.outputs.version }}.zip" $file; rm -rf $file; done
+          cd ..
       - name: Publish Export Artifact
         uses: actions/upload-artifact@v2
         with:

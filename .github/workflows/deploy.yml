@@ -190,12 +190,12 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: version
-          path: version/VERSION
+          path: version
       - name: Read Version Number
         id: version_number
         uses: juliangruber/read-file-action@v1
         with:
-          path: ./version
+          path: ./version/VERSION
       - name: Send Discord Success Message
         if: ${{ env.IS_MAIN && env.DID_PREV_JOBS_SUCCEED == 'true' }}
         run: |

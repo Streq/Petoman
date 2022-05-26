@@ -190,7 +190,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: version
-          path: version
+          path: version/VERSION
       - name: Read Version Number
         id: version_number
         uses: juliangruber/read-file-action@v1

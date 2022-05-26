@@ -16,9 +16,9 @@ env:
   ITCH_PROJECT_NAME: "petoman"
   ITCH_USERNAME: "streq"
   GODOT_VERSION: "3.4.4"
-  RELEASE_LINUX: false
-  RELEASE_WINDOWS: false
-  RELEASE_MAC: false
+  RELEASE_LINUX: true
+  RELEASE_WINDOWS: true
+  RELEASE_MAC: true
   RELEASE_HTML5: true
 
 jobs:

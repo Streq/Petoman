@@ -53,12 +53,12 @@ jobs:
           user_format_type: "csv"
       - name: Add Version Number to Exports
         run: |
-          echo -n ${{ steps.versioning.outputs.version }} >> ./exports/VERSION
+          echo -n ${{ steps.versioning.outputs.version }} > ./VERSION
       - name: Publish Version Artifact
         uses: actions/upload-artifact@v2
         with:
           name: version
-          path: exports/VERSION
+          path: ./VERSION
       - name: Download + Authorize Godot
         run: |
           curl -L -o godot.zip https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_linux_headless.64.zip
@@ -96,9 +96,7 @@ jobs:
           ./godot --path ./project.godot --export "HTML5" ./exports/html/index.html
       - name: Zip Exports
         run: |
-          for file in exports/*; do zip -r ${file%.*}.zip $file; done
-          ls -a
-          ls exports -a
+          for file in exports/*; do zip -r ${file%.*}.zip $file; rm -rf $file; done
       - name: Publish Export Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -116,14 +114,11 @@ jobs:
           fetch-depth: 0
       - name: Download Exports
         uses: actions/download-artifact@v2
-        with:
-          name: exports
-          path: exports
       - name: Read Version Number
         id: version_number
         uses: juliangruber/read-file-action@v1
         with:
-          path: ./exports/VERSION
+          path: ./version/VERSION
       - name: Test Release Variables
         run: |
           echo "Version Number $VERSION_NUMBER"
@@ -156,9 +151,6 @@ jobs:
     steps:
       - name: Download Exports
         uses: actions/download-artifact@v2
-        with:
-          name: exports
-          path: exports
       - name: Download + Authorize Butler
         run: |
           curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
@@ -169,16 +161,16 @@ jobs:
         run: ./butler login
       - name: Push Windows Export To Itch
         if: ${{ env.RELEASE_WINDOWS == 'true' }}
-        run: ./butler push ./exports/windows.zip $ITCH_USERNAME/$ITCH_PROJECT_NAME:win --userversion-file ./exports/VERSION
+        run: ./butler push ./exports/windows.zip $ITCH_USERNAME/$ITCH_PROJECT_NAME:win --userversion-file ./version/VERSION
       - name: Push Mac Export To Itch
         if: ${{ env.RELEASE_MAC == 'true' }}
-        run: ./butler push ./exports/mac.zip $ITCH_USERNAME/$ITCH_PROJECT_NAME:mac --userversion-file ./exports/VERSION
+        run: ./butler push ./exports/mac.zip $ITCH_USERNAME/$ITCH_PROJECT_NAME:mac --userversion-file ./version/VERSION
       - name: Push Linux Export To Itch
         if: ${{ env.RELEASE_LINUX == 'true' }}
-        run: ./butler push ./exports/linux.zip $ITCH_USERNAME/$ITCH_PROJECT_NAME:linux --userversion-file ./exports/VERSION
+        run: ./butler push ./exports/linux.zip $ITCH_USERNAME/$ITCH_PROJECT_NAME:linux --userversion-file ./version/VERSION
       - name: Push HTML5 Export To Itch
         if: ${{ env.RELEASE_HTML5 == 'true' }}
-        run: ./butler push ./exports/html.zip $ITCH_USERNAME/$ITCH_PROJECT_NAME:html --userversion-file ./exports/VERSION
+        run: ./butler push ./exports/html.zip $ITCH_USERNAME/$ITCH_PROJECT_NAME:html --userversion-file ./version/VERSION
   AlertPipelineResult:
     needs: [BuildAndPublish, CreateNewGithubRelease, PushExportsToItch]
     if: ${{ always() }}

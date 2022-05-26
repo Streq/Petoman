@@ -201,10 +201,14 @@ jobs:
         run: |
           curl --location --request POST $DISCORD_WEBHOOK \
             --header 'Content-Type: application/json' \
-            --data-raw "{\"content\": \"$PROJECT_NAME ${{ steps.version_number.outputs.content }} has successfully released and deployed!\"}"
+            --data-raw "{\"content\": \"$PROJECT_NAME $VERSION has successfully released and deployed!\"}"
+        env:
+          VERSION: {{ steps.version_number.outputs.content }}
       - name: Send Discord Failure Message
         if: ${{ env.IS_MAIN && env.DID_PREV_JOBS_SUCCEED != 'true' }}
         run: |
           curl --location --request POST $DISCORD_WEBHOOK \
             --header 'Content-Type: application/json' \
-            --data-raw "{\"content\": \"$PROJECT_NAME ${{ steps.version_number.outputs.content }} release and/or deployment has failed!\"}"
+            --data-raw "{\"content\": \"$PROJECT_NAME $VERSION release and/or deployment has failed!\"}"
+        env:
+          VERSION: {{ steps.version_number.outputs.content }}

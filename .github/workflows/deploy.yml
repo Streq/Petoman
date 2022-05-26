@@ -53,7 +53,7 @@ jobs:
           user_format_type: "csv"
       - name: Add Version Number to Exports
         run: |
-          echo ${{ steps.versioning.outputs.version }} > ./exports/VERSION
+          echo -n ${{ steps.versioning.outputs.version }} >> ./exports/VERSION
       - name: Publish Version Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -199,7 +199,7 @@ jobs:
       - name: Send Discord Success Message
         if: ${{ env.IS_MAIN && env.DID_PREV_JOBS_SUCCEED == 'true' }}
         run: |
-          echo '{"content": "'"$PROJECT_NAME"' '"$VERSION"' has successfully released and deployed!"}' > myjson
+          echo -n '{"content": "'"$PROJECT_NAME"' '"$VERSION"' has successfully released and deployed!"}' >> myjson
           curl --location --request POST $DISCORD_WEBHOOK \
             --header 'Content-Type: application/json' \
             --data-binary "@myjson"
@@ -210,7 +210,7 @@ jobs:
       - name: Send Discord Failure Message
         if: ${{ env.IS_MAIN && env.DID_PREV_JOBS_SUCCEED != 'true' }}
         run: |
-          echo '{"content": "'"$PROJECT_NAME"' '"$VERSION"' release and/or deployment has failed!"}' > myjson
+          echo -n '{"content": "'"$PROJECT_NAME"' '"$VERSION"' release and/or deployment has failed!"}' >> myjson
           curl --location --request POST $DISCORD_WEBHOOK \
             --header 'Content-Type: application/json' \
             --data-binary "@myjson"

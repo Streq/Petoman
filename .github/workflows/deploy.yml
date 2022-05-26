@@ -29,6 +29,30 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - name: Read Version Number
+        id: versioning
+        uses: paulhatch/semantic-version@v4.0.2
+        with:
+          # The prefix to use to identify tags
+          tag_prefix: "v"
+          # A string which, if present in a git commit, indicates that a change represents a
+          # major (breaking) change, supports regular expressions wrapped with '/'
+          major_pattern: "(MAJOR)"
+          # Same as above except indicating a minor change, supports regular expressions wrapped with '/'
+          minor_pattern: "(MINOR)"
+          # A string to determine the format of the version output
+          format: "${major}.${minor}.${patch}"
+          # If this is set to true, *every* commit will be treated as a new version.
+          bump_each_commit: true
+          # If true, the body of commits will also be searched for major/minor patterns to determine the version type.
+          search_commit_body: false
+          # The output method used to generate list of users, 'csv' or 'json'.
+          user_format_type: "csv"
+      - name: Publish Version Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: version
+          path: exports/VERSION
       - name: Download + Authorize Godot
         run: |
           curl -L -o godot.zip https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_linux_headless.64.zip
@@ -72,33 +96,17 @@ jobs:
           for file in exports/*; do zip -r ${file%.*}.zip $file; done
           ls -a
           ls exports -a
-      - name: Read Version Number
-        id: versioning
-        uses: paulhatch/semantic-version@v4.0.2
-        with:
-          # The prefix to use to identify tags
-          tag_prefix: "v"
-          # A string which, if present in a git commit, indicates that a change represents a
-          # major (breaking) change, supports regular expressions wrapped with '/'
-          major_pattern: "(MAJOR)"
-          # Same as above except indicating a minor change, supports regular expressions wrapped with '/'
-          minor_pattern: "(MINOR)"
-          # A string to determine the format of the version output
-          format: "${major}.${minor}.${patch}"
-          # If this is set to true, *every* commit will be treated as a new version.
-          bump_each_commit: true
-          # If true, the body of commits will also be searched for major/minor patterns to determine the version type.
-          search_commit_body: false
-          # The output method used to generate list of users, 'csv' or 'json'.
-          user_format_type: "csv"
+      
       - name: Add Version Number to Exports
         run: |
           echo ${{ steps.versioning.outputs.version }} > ./exports/VERSION
+
       - name: Publish Export Artifact
         uses: actions/upload-artifact@v2
         with:
           name: exports
           path: exports
+
   CreateNewGithubRelease:
     needs: BuildAndPublish
     if: ${{ contains(github.ref, 'main') }}
@@ -180,15 +188,25 @@ jobs:
       DID_PREV_JOBS_SUCCEED: ${{ contains(needs.BuildAndPublish.result, 'success' ) && contains(needs.CreateNewGithubRelease.result, 'success' ) && contains(needs.PushExportsToItch.result, 'success' ) }}
     runs-on: ubuntu-latest
     steps:
+      - name: Download Version
+        uses: actions/download-artifact@v2
+        with:
+          name: version
+          path: version
+      - name: Read Version Number
+        id: version_number
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./version
       - name: Send Discord Success Message
         if: ${{ env.IS_MAIN && env.DID_PREV_JOBS_SUCCEED == 'true' }}
         run: |
           curl --location --request POST $DISCORD_WEBHOOK \
             --header 'Content-Type: application/json' \
-            --data-raw "{\"content\": \"$PROJECT_NAME has successfully released and deployed!\"}"
+            --data-raw "{\"content\": \"$PROJECT_NAME ${{ steps.version_number.outputs.content }} has successfully released and deployed!\"}"
       - name: Send Discord Failure Message
         if: ${{ env.IS_MAIN && env.DID_PREV_JOBS_SUCCEED != 'true' }}
         run: |
           curl --location --request POST $DISCORD_WEBHOOK \
             --header 'Content-Type: application/json' \
-            --data-raw "{\"content\": \"$PROJECT_NAME release and/or deployment has failed!\"}"
+            --data-raw "{\"content\": \"$PROJECT_NAME ${{ steps.version_number.outputs.content }} release and/or deployment has failed!\"}"

@@ -199,17 +199,21 @@ jobs:
       - name: Send Discord Success Message
         if: ${{ env.IS_MAIN && env.DID_PREV_JOBS_SUCCEED == 'true' }}
         run: |
+          echo '{"content": "'"$PROJECT_NAME"' '"$VERSION"' has successfully released and deployed!"}' > myjson
           curl --location --request POST $DISCORD_WEBHOOK \
             --header 'Content-Type: application/json' \
-            --data-raw '{"content": "'"$PROJECT_NAME"' '"$VERSION"' has successfully released and deployed!"}'
-          echo '{"content": "'"$PROJECT_NAME"' '"$VERSION"' has successfully released and deployed!"}'
+            --data-binary "@myjson"
+            cat myjson
+          
         env:
           VERSION: ${{ steps.version_number.outputs.content }}
       - name: Send Discord Failure Message
         if: ${{ env.IS_MAIN && env.DID_PREV_JOBS_SUCCEED != 'true' }}
         run: |
+          echo '{"content": "'"$PROJECT_NAME"' '"$VERSION"' release and/or deployment has failed!"}' > myjson
           curl --location --request POST $DISCORD_WEBHOOK \
             --header 'Content-Type: application/json' \
-            --data-raw '{"content": "'"$PROJECT_NAME"' '"$VERSION"' release and/or deployment has failed!"}'
+            --data-binary "@myjson"
+            cat myjson
         env:
           VERSION: ${{ steps.version_number.outputs.content }}
